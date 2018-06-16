@@ -1,12 +1,14 @@
-FROM golang:1.10.3 as builder
+FROM golang:1.10.3
 WORKDIR /
 WORKDIR /go/src/github.com/rciurlea/mds-go-cd-k8s
 ADD . .
-RUN go build -o app
-RUN ls -la
+RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -o app .
 
 FROM alpine
-COPY --from=builder /go/src/github.com/rciurlea/mds-go-cd-k8s/app /app
-RUN ls -la /app
+RUN apk --no-cache add ca-certificates
+WORKDIR /root
+RUN ls -la
+COPY --from=0 /go/src/github.com/rciurlea/mds-go-cd-k8s/app .
+RUN ls -la
 EXPOSE 8080
-CMD ["/app"]
+ENTRYPOINT ["/root/app"]

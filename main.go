@@ -11,6 +11,6 @@ func main() {
 func index(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "salut!",
-		"version": 2,
+		"version": "2.1",
 	})
 }

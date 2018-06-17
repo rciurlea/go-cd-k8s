@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+mds-go-cd-k8s
 
 # Test binary, build with `go test -c`
 *.test

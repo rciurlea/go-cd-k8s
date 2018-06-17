@@ -1,6 +1,11 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	r := gin.Default()
@@ -12,5 +17,6 @@ func index(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "salut!",
 		"version": "2.1",
+		"time":    fmt.Sprintf("%v", time.Now()),
 	})
 }
